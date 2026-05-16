@@ -82,7 +82,6 @@ const WatchMovie = () => {
             allowFullScreen
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             referrerPolicy="origin"
-            {...(embedInfo.sandbox && { sandbox: "allow-scripts allow-same-origin allow-forms" })}
             onLoad={() => setPlayerLoading(false)}
           />
         </div>

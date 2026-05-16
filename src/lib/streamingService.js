@@ -10,40 +10,40 @@
  *    - name: Display name for the source
  *    - movieUrl: Function that takes (tmdbId) and returns the embed URL
  *    - tvUrl: Function that takes (tmdbId, season, episode) and returns the embed URL
- *    - sandbox: true if iframe sandbox works (blocks ads), false if it breaks the player
- *    - hasAds: true if the source has pop-up ads
  */
 
 const EMBED_SOURCES = [
   {
-    name: "vidsrc.cc",
-    movieUrl: (tmdbId) => `https://vidsrc.cc/v2/embed/movie/${tmdbId}`,
-    tvUrl: (tmdbId, season, episode) => `https://vidsrc.cc/v2/embed/tv/${tmdbId}/${season}/${episode}`,
-    sandbox: true,  // Sandbox works - blocks ads
-    hasAds: false,
+    name: "vidlink",
+    movieUrl: (tmdbId) => `https://vidlink.pro/movie/${tmdbId}`,
+    tvUrl: (tmdbId, season, episode) => `https://vidlink.pro/tv/${tmdbId}/${season}/${episode}`,
   },
   {
     name: "videasy",
     movieUrl: (tmdbId) => `https://player.videasy.net/movie/${tmdbId}`,
     tvUrl: (tmdbId, season, episode) => `https://player.videasy.net/tv/${tmdbId}/${season}/${episode}`,
-    sandbox: false, // Sandbox breaks player
-    hasAds: true,
   },
   {
-    name: "vidsrc.to",
-    movieUrl: (tmdbId) => `https://vidsrc.to/embed/movie/${tmdbId}`,
-    tvUrl: (tmdbId, season, episode) => `https://vidsrc.to/embed/tv/${tmdbId}/${season}/${episode}`,
-    sandbox: false,  // Sandbox works - blocks ads
-    hasAds: true,
+    name: "vidify",
+    movieUrl: (tmdbId) => `https://player.vidify.top/embed/movie/${tmdbId}`,
+    tvUrl: (tmdbId, season, episode) => `https://player.vidify.top/embed/tv/${tmdbId}/${season}/${episode}`,
   },
   {
-    name: "vidsrc.su",
-    movieUrl: (tmdbId) => `https://vidsrc.su/movie/${tmdbId}`,
-    tvUrl: (tmdbId, season, episode) => `https://vidsrc.su/tv/${tmdbId}/${season}/${episode}`,
-    sandbox: false, // Sandbox breaks player
-    hasAds: true,
+    name: "vidsrc.cc",
+    movieUrl: (tmdbId) => `https://vidsrc.cc/v2/embed/movie/${tmdbId}`,
+    tvUrl: (tmdbId, season, episode) => `https://vidsrc.cc/v2/embed/tv/${tmdbId}/${season}/${episode}`,
   },
-  
+  {
+    name: "vidcore",
+    movieUrl: (tmdbId) => `https://vidcore.net/movie/${tmdbId}`,
+    tvUrl: (tmdbId, season, episode) => `https://vidcore.net/tv/${tmdbId}/${season}/${episode}`,
+  },
+  {
+    name: "vidfast",
+    movieUrl: (tmdbId) => `https://vidfast.pro/movie/${tmdbId}`,
+    tvUrl: (tmdbId, season, episode) => `https://vidfast.pro/tv/${tmdbId}/${season}/${episode}`,
+  },
+
   // ============================================================
   // ADD NEW SOURCES BELOW - Copy this template:
   // ============================================================
@@ -51,8 +51,6 @@ const EMBED_SOURCES = [
   //   name: "source-name",
   //   movieUrl: (tmdbId) => `https://example.com/movie/${tmdbId}`,
   //   tvUrl: (tmdbId, season, episode) => `https://example.com/tv/${tmdbId}/${season}/${episode}`,
-  //   sandbox: false, // Test if sandbox works without breaking player
-  //   hasAds: true,   // Set to true if source has pop-up ads
   // },
 ];
 
@@ -67,8 +65,6 @@ export function getMovieEmbed(tmdbId, sourceIndex = 0) {
     sourceName: source.name,
     sourceIndex,
     totalSources: EMBED_SOURCES.length,
-    sandbox: source.sandbox,
-    hasAds: source.hasAds,
   };
 }
 
@@ -79,8 +75,6 @@ export function getTvShowEmbed(tmdbId, season, episode, sourceIndex = 0) {
     sourceName: source.name,
     sourceIndex,
     totalSources: EMBED_SOURCES.length,
-    sandbox: source.sandbox,
-    hasAds: source.hasAds,
   };
 }
 
@@ -89,5 +83,5 @@ export function getNextSourceIndex(currentIndex) {
 }
 
 export function getAllSources() {
-  return EMBED_SOURCES.map((s, i) => ({ name: s.name, index: i, hasAds: s.hasAds }));
+  return EMBED_SOURCES.map((s, i) => ({ name: s.name, index: i }));
 }

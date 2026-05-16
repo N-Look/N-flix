@@ -125,7 +125,6 @@ const WatchTvShow = () => {
             allowFullScreen
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             referrerPolicy="origin"
-            {...(embedInfo.sandbox && { sandbox: "allow-scripts allow-same-origin allow-forms" })}
             onLoad={() => setPlayerLoading(false)}
           />
         </div>
@@ -170,11 +169,6 @@ const WatchTvShow = () => {
                             }`}
                           >
                             {source.name}
-                            {source.hasAds && (
-                              <span className="text-[10px] bg-yellow-500/20 text-yellow-500 px-1.5 py-0.5 rounded">
-                                ADS
-                              </span>
-                            )}
                           </button>
                         ))}
                       </div>
